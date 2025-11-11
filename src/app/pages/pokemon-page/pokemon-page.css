@@ -1,0 +1,56 @@
+@reference "tailwindcss";
+
+.title {
+  @apply text-6xl font-extrabold leading-tight uppercase tracking-tight mb-6 bg-gradient-to-r from-yellow-400 via-red-500 to-blue-500 bg-clip-text text-transparent;
+  /* Make the element a positioning context for the moving sheen */
+  position: relative;
+  overflow: hidden;
+  /* Allow the gradient to shift for a subtle living effect */
+  background-size: 200% 100%;
+  animation: gradientShift 8s ease-in-out infinite;
+}
+
+/* Bright moving reflection (sheen) across the text - smooth, no à-coups */
+.title::after {
+  content: "";
+  position: absolute;
+  top: -30%;
+  left: -50%;
+  width: 60%;
+  height: 160%;
+  background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0) 100%);
+  transform: skewX(-18deg) translateX(-140%);
+  filter: blur(6px);
+  mix-blend-mode: screen; /* plus doux sur les couleurs */
+  pointer-events: none;
+  animation: sheenMove 3.2s cubic-bezier(.22,.8,.3,1) infinite;
+  opacity: 0.9;
+}
+
+/* Keyframes */
+@keyframes gradientShift {
+  0% { background-position: 0 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0 50%; }
+}
+
+@keyframes sheenMove {
+  0%   { transform: skewX(-18deg) translateX(-140%); opacity: 0; }
+  15%  { opacity: 0.75; }
+  50%  { transform: skewX(-18deg) translateX(0%); opacity: 0.85; }
+  85%  { opacity: 0.7; }
+  100% { transform: skewX(-18deg) translateX(140%); opacity: 0; }
+}
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .title,
+  .title::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+.pokemon-details {
+  @apply bg-gradient-to-br from-slate-900 to-slate-800 text-slate-100 rounded-xl p-4 overflow-auto max-h-72 text-sm font-mono shadow-lg ring-1 ring-slate-700;
+}

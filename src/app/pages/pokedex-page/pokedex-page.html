@@ -1,0 +1,15 @@
+<h1 class="text-6xl sm:text-7xl font-extrabold leading-tight text-center uppercase tracking-tight mb-6 bg-gradient-to-r from-yellow-400 via-red-500 to-blue-500 bg-clip-text text-transparent">Pokédex</h1>
+
+<div class="mb-8"><button type="button" mat-raised-button color="primary" (click)="loadPokemons()">Reload Pokémons</button></div>
+
+@if(pokemons.isLoading()) {
+  <mat-spinner></mat-spinner>
+} @else if (pokemons.error()) {
+  <div>Could not load pokemons information</div>
+} @else if (pokemons.hasValue()) {
+  <ul>
+  @for (pokemon of pokemons.value(); track pokemon.pokedex_id) {
+    <li>{{ pokemon.name.fr }}</li>
+  }
+  </ul>
+}

@@ -1,0 +1,19 @@
+<h1
+  class="title">
+  Pokemon Search</h1>
+
+<mat-form-field class="w-sm max-w-full mb-4">
+  <mat-label>Pokemon ID</mat-label>
+  <input matInput type="number" inputmode="numeric" [field]="form.id"/>
+  <mat-error>{{ form.id().errors()[0]?.message }}</mat-error>
+</mat-form-field>
+
+@if (pokemon.isLoading()) {
+  <mat-spinner></mat-spinner>
+} @else if (pokemon.error()) {
+  <div>🫠 Could not load pokemon information</div>
+} @else if (pokemon.hasValue()) {
+  <pre
+    class="pokemon-details"
+  ><code>{{ pokemon.value() | json }}</code></pre>
+}
