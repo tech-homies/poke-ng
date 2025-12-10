@@ -1,0 +1,63 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.pokemon-title {
+  font-family: 'Pokefont', sans-serif;
+  font-size: 6rem;
+  font-weight: bold;
+  color: #ffcb05;
+  -webkit-text-stroke: 3px #3d7dca;
+  text-shadow:
+    -4px -4px 0 #3d7dca,
+    4px -4px 0 #3d7dca,
+    -4px 4px 0 #3d7dca,
+    4px 4px 0 #3d7dca,
+    -4px -4px 2px #000,
+    4px -4px 2px #000,
+    -4px 4px 2px #000,
+    4px 4px 2px #000;
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+.pokemon-title::before {
+  content: 'POKEMON';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    #ffcb05,
+    #c7a008,
+    #ffcb05,
+    #c7a008,
+    #ffcb05
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shine 5s linear infinite;
+  z-index: 1;
+}
+
+@keyframes shine {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+@font-face {
+  font-family: 'Pokefont';
+  src: url('/assets/fonts/pokemon-solid.ttf') format('truetype');
+}

@@ -1,0 +1,11 @@
+<h1 class="pokemon-title">POKEMON</h1>
+
+@for (trainer of trainers(); track trainer.id) {
+  <mat-card>
+    {{ trainer.id }}
+    {{ trainer.name }}
+    <mat-card-actions>
+      <button type="button" (click)="selectTrainer(trainer)">Select</button>
+    </mat-card-actions>
+  </mat-card>
+}
