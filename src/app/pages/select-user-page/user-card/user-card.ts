@@ -15,7 +15,7 @@ import { UserStore } from '../../../services/store/user.store';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-user',
+  selector: 'app-user-card',
   imports: [
     MatButton,
     MatCard,
@@ -27,10 +27,10 @@ import { Router } from '@angular/router';
     MatCardSubtitle,
     MatCardTitle,
   ],
-  templateUrl: './user.html',
-  styleUrl: './user.scss',
+  templateUrl: './user-card.html',
+  styleUrl: './user-card.scss',
 })
-export class User {
+export class UserCard {
   private readonly userStore = inject(UserStore);
   private readonly router = inject(Router);
 

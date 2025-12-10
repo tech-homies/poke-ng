@@ -15,6 +15,18 @@ export const routes: Routes = [
         path: 'trainers',
         loadComponent: () => import('./pages/trainers-page/trainers-page'),
       },
+      {
+        path: 'trainers/:id',
+        loadComponent: () => import('./pages/trainer-details-page/trainer-details-page'),
+      },
+      {
+        path: 'pokemons',
+        loadComponent: () => import('./pages/pokemons-page/pokemons-page'),
+      },
+      {
+        path: 'ranking',
+        loadComponent: () => import('./pages/ranking-page/ranking-page'),
+      },
     ],
   },
   { path: '', redirectTo: '/select-trainer', pathMatch: 'full' },

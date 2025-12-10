@@ -1,1 +1,14 @@
-<p>trainers-page works!</p>
+<h1>Dresseurs</h1>
+@if (trainers.isLoading()) {
+  <mat-spinner></mat-spinner>
+} @else {
+  <div class="trainers">
+    {{ trainers.value().length }} dresseurs trouvés.
+
+    @for (trainer of trainers.value(); track trainer.id) {
+      {{ trainer.name }}
+      <app-trainer-card [trainer]="trainer"></app-trainer-card>
+    }
+  </div>
+}
+

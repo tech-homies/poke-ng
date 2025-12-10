@@ -20,7 +20,7 @@ html {
 body {
   // Default the application to a light color theme. This can be changed to
   // `dark` to enable the dark color theme, or to `light dark` to defer to the
-  // user's system settings.
+  // user-card's system settings.
   color-scheme: light;
 
   // Set a default background, font and text colors for the application using
@@ -30,7 +30,7 @@ body {
   color: var(--mat-sys-on-surface);
   font: var(--mat-sys-body-medium);
 
-  // Reset the user agent margin.
+  // Reset the user-card agent margin.
   margin: 0;
 }
 /* You can add global styles to this file, and also import other style files */

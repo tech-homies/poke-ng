@@ -14,4 +14,8 @@ export class UserStore {
   isLogged() {
     return this.user() !== null;
   }
+
+  logout() {
+    this.user.set(null);
+  }
 }

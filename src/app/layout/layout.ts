@@ -1,14 +1,15 @@
 import { Component, inject } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { AsyncPipe } from '@angular/common';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
-import { Observable } from 'rxjs';
-import { map, shareReplay } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { UserStore } from '../services/store/user.store';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { MatMenu, MatMenuItem, MatMenuTrigger } from '@angular/material/menu';
 
 @Component({
   selector: 'app-layout',
@@ -20,17 +21,27 @@ import { UserStore } from '../services/store/user.store';
     MatSidenavModule,
     MatListModule,
     MatIconModule,
-    AsyncPipe,
+    RouterOutlet,
+    RouterLink,
+    MatMenuTrigger,
+    MatMenu,
+    MatMenuItem,
   ],
 })
 export default class Layout {
-  private breakpointObserver = inject(BreakpointObserver);
-  private readonly userStore = inject(UserStore);
+  readonly #breakpointObserver = inject(BreakpointObserver);
+  readonly #userStore = inject(UserStore);
+  readonly #router = inject(Router);
 
-  readonly user = this.userStore.user;
+  readonly user = this.#userStore.user;
 
-  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
-    map((result) => result.matches),
-    shareReplay(),
+  readonly isHandset = toSignal(
+    this.#breakpointObserver.observe(Breakpoints.Handset).pipe(map((result) => result.matches)),
+    { initialValue: false },
   );
+
+  logout(): void {
+    this.#userStore.logout();
+    this.#router.navigate(['']);
+  }
 }
