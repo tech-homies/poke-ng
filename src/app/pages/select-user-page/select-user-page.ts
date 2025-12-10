@@ -1,22 +1,19 @@
 import { Component, inject, signal } from '@angular/core';
 import { TrainersApi } from '../../services/api/trainers.api';
 import { TrainerDTO } from '../../services/api/trainer.dto';
-import { MatCard, MatCardActions } from '@angular/material/card';
-import { Router } from '@angular/router';
-import { UserStore } from '../../services/store/user.store';
+import { User } from './user/user';
+import { MatButton } from '@angular/material/button';
 
 @Component({
   selector: 'app-select-user-page',
-  imports: [MatCard, MatCardActions],
+  imports: [User, MatButton],
   templateUrl: './select-user-page.html',
   styleUrl: './select-user-page.scss',
 })
 export default class SelectUserPage {
   private readonly trainersApi = inject(TrainersApi);
-  private readonly userStore = inject(UserStore);
-  private readonly router = inject(Router);
 
-  trainers = signal<TrainerDTO[]>([]);
+  users = signal<TrainerDTO[]>([]);
 
   constructor() {
     this.loadTrainers();
@@ -24,12 +21,7 @@ export default class SelectUserPage {
 
   private loadTrainers(): void {
     this.trainersApi.getAll().subscribe((trainers) => {
-      this.trainers.set(trainers);
+      this.users.set(trainers);
     });
-  }
-
-  selectTrainer(trainer: TrainerDTO) {
-    this.userStore.setUser(trainer);
-    this.router.navigate(['/app/trainers']);
   }
 }
