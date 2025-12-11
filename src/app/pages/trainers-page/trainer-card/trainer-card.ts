@@ -11,11 +11,12 @@ import {
   MatCardTitle,
 } from '@angular/material/card';
 import { TeamsApi } from '../../../services/api/teams.api';
-import { MatButton } from '@angular/material/button';
+import { MatButton, MatIconButton } from '@angular/material/button';
 import { PokemonDTO } from '../../../services/api/pokemonDTO';
 import { PokemonsApi } from '../../../services/api/pokemons.api';
 import { concatAll, concatMap, toArray } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'app-trainer-card',
@@ -29,6 +30,8 @@ import { map } from 'rxjs/operators';
     MatCardSubtitle,
     MatCardTitle,
     MatButton,
+    MatIcon,
+    MatIconButton,
   ],
   templateUrl: './trainer-card.html',
   styleUrl: './trainer-card.scss',
@@ -55,5 +58,14 @@ export class TrainerCard implements OnInit {
       .subscribe((pokemons) => {
         this.pokemons.set(pokemons);
       });
+  }
+
+  protected updateTeam() {
+    this.teamsApi
+      .setTrainerTeam({
+        trainerId: this.trainer().id,
+        pokemons: this.pokemons().map((pokemon) => pokemon.pokedex_id + 1),
+      })
+      .subscribe();
   }
 }
