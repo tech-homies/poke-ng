@@ -10,6 +10,17 @@
       <p>
         @if (teamResource) {
           {{ teamResource.value()?.pokemons | json}}
+
+          @for (pokemon of pokemonResources(); track $index) {
+            @if (pokemon.isLoading()) {
+              <div>Loading...</div>
+            } @else {
+              @if (pokemon.value(); as pokemon) {
+                <div>{{ pokemon.name }} (Level: {{ pokemon.category }})</div>
+              }
+            }
+          }
+
         }
         The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
         A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
