@@ -1,4 +1,4 @@
-import { Component, inject, input, OnInit, signal, Signal } from '@angular/core';
+import { Component, effect, inject, input, OnInit, signal, Signal } from '@angular/core';
 import { TrainerDTO } from '../../../services/api/trainer.dto';
 import {
   MatCard,
@@ -14,9 +14,10 @@ import { TeamsApi } from '../../../services/api/teams.api';
 import { MatButton, MatIconButton } from '@angular/material/button';
 import { PokemonDTO } from '../../../services/api/pokemonDTO';
 import { PokemonsApi } from '../../../services/api/pokemons.api';
-import { concatAll, concatMap, toArray } from 'rxjs';
+import { concatAll, concatMap, from, Observable, switchMap, toArray } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { MatIcon } from '@angular/material/icon';
+import { toObservable } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-trainer-card',
@@ -36,28 +37,25 @@ import { MatIcon } from '@angular/material/icon';
   templateUrl: './trainer-card.html',
   styleUrl: './trainer-card.scss',
 })
-export class TrainerCard implements OnInit {
+export class TrainerCard {
   readonly trainer = input.required<TrainerDTO>();
   readonly teamsApi = inject(TeamsApi);
   readonly pokemonsApi = inject(PokemonsApi);
   pokemons = signal<PokemonDTO[]>([]);
 
-  ngOnInit(): void {
-    this.#loadTeam();
-  }
-
-  #loadTeam() {
-    this.teamsApi
-      .getTrainerTeam(this.trainer())
+  constructor() {
+    toObservable(this.trainer)
       .pipe(
+        switchMap((trainer) => this.teamsApi.getTrainerTeam(trainer)),
         map((team) => team.pokemons),
-        concatAll(),
-        concatMap((pokemonId) => this.pokemonsApi.getOne(pokemonId)),
-        toArray(),
+        switchMap((pokemonIds) =>
+          from(pokemonIds).pipe(
+            concatMap((pokemonId) => this.pokemonsApi.getOne(pokemonId)),
+            toArray(),
+          ),
+        ),
       )
-      .subscribe((pokemons) => {
-        this.pokemons.set(pokemons);
-      });
+      .subscribe((pokemons) => this.pokemons.set(pokemons));
   }
 
   protected updateTeam() {
