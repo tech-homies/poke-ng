@@ -1,0 +1,42 @@
+@use '@angular/material' as mat;
+
+:host {
+  display: block;
+  width: 300px;
+}
+
+.trainer-avatar {
+  object-fit: cover;
+  height: 250px;
+}
+
+.pokemon-list {
+  display: inline-flex;
+  width: 100%;
+  justify-content: space-evenly;
+  gap: 12px;
+
+  .pokemon-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+}
+
+.pokemon-img {
+  width: 48px;
+  height: 48px;
+}
+
+.actions {
+  display: inline-flex;
+  justify-content: space-evenly;
+}
+
+button.battle {
+  @include mat.button-overrides((
+    filled-container-color: var(--mat-sys-error-container),
+    filled-label-text-color: var(--mat-sys-error)
+  ));
+}

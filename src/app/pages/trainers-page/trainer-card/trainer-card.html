@@ -5,30 +5,20 @@
       <mat-card-title>{{ trainer.name }}</mat-card-title>
       <mat-card-subtitle>ID: {{ trainer.id }}</mat-card-subtitle>
     </mat-card-header>
-    <img mat-card-image [src]="trainer.avatarUrl" [alt]="'Photo of ' + trainer.name">
+    <img mat-card-image class="trainer-avatar" [src]="trainer.avatarUrl" [alt]="'Photo of ' + trainer.name">
     <mat-card-content>
-      <p>
-        @if (teamResource) {
-          {{ teamResource.value()?.pokemons | json}}
-
-          @for (pokemon of pokemonResources(); track $index) {
-            @if (pokemon.isLoading()) {
-              <div>Loading...</div>
-            } @else {
-              @if (pokemon.value(); as pokemon) {
-                <div>{{ pokemon.name }} (Level: {{ pokemon.category }})</div>
-              }
-            }
-          }
-
+      <p class="pokemon-list">
+        @for (pokemon of pokemons(); track pokemon.pokedex_id) {
+          <div class="pokemon-item">
+            <img class="pokemon-img" [src]="pokemon.sprites.regular" [alt]="'Image of ' + pokemon.name.en">
+            <div>{{ pokemon.name.fr }}</div>
+          </div>
         }
-        The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-        A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
-        bred for hunting.
       </p>
     </mat-card-content>
-    <mat-card-actions>
-      <button matButton type="button">Select</button>
+    <mat-card-actions class="actions">
+      <button matButton type="button">Combats</button>
+      <button matButton="filled" type="button" class="battle">Défier</button>
     </mat-card-actions>
   </mat-card>
 }

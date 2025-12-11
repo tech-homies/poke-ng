@@ -2,3 +2,13 @@
   display: block;
   max-width: 300px;
 }
+
+.actions {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.user-avatar {
+  object-fit: cover;
+  height: 250px;
+}

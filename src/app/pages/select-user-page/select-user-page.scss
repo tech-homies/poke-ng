@@ -3,6 +3,10 @@
   flex-direction: column;
   align-items: center;
   gap: 16px;
+
+  height: 100%;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .users {

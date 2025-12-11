@@ -10,7 +10,7 @@ import { filter } from 'rxjs';
 import { UserCard } from './user-card/user-card';
 
 @Component({
-  selector: 'app-select-user-card-page',
+  selector: 'app-select-user-page',
   imports: [UserCard, MatButton, MatProgressSpinner, UserCard],
   templateUrl: './select-user-page.html',
   styleUrl: './select-user-page.scss',
