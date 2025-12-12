@@ -9,9 +9,29 @@
     </mat-form-field>
     <mat-form-field>
       <mat-label>Description</mat-label>
-      <input matInput [field]="trainerForm.description"/>
+      <textarea matInput [field]="trainerForm.description" rows="8"></textarea>
       <mat-error>{{ trainerForm.description().errors()[0]?.message }}</mat-error>
     </mat-form-field>
+    <mat-form-field>
+      <mat-label>Avatar</mat-label>
+      <input type="url" matInput [field]="trainerForm.avatarUrl"/>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Age</mat-label>
+      <input type="number" matInput [field]="trainerForm.age"/>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Ville</mat-label>
+      <input matInput [field]="trainerForm.hometown"/>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Niveau</mat-label>
+      <input matInput [field]="trainerForm.level"/>
+    </mat-form-field>
+<!--    <mat-form-field>-->
+<!--      <mat-label>Pokemon favori</mat-label>-->
+<!--      <input type="number" matInput [field]="trainerForm.favoritePokemon"/>-->
+<!--    </mat-form-field>-->
   </div>
 </mat-dialog-content>
 <mat-dialog-actions>

@@ -1,4 +1,4 @@
-import { Component, effect, signal } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import {
   MatDialogActions,
@@ -8,7 +8,8 @@ import {
 } from '@angular/material/dialog';
 import { MatError, MatFormField, MatInput, MatLabel } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { Field, form, minLength, required, validateHttp } from '@angular/forms/signals';
+import { Field, form, minLength, required } from '@angular/forms/signals';
+import { PokemonDTO } from '../../../services/api/pokemonDTO';
 
 @Component({
   selector: 'app-add-user-card-dialog',
@@ -32,13 +33,17 @@ import { Field, form, minLength, required, validateHttp } from '@angular/forms/s
 export class AddUserDialog {
   trainerModel = signal({
     name: '',
+    avatarUrl: '',
     description: '',
-    birthDate: null as Date | null,
+    age: 10,
+    hometown: '',
+    level: '' as '' | 'beginner' | 'intermediate' | 'advanced' | 'master',
+    favoritePokemon: null as null | PokemonDTO['pokedex_id'],
   });
 
   trainerForm = form(this.trainerModel, (schemaPath) => {
     required(schemaPath.name, { message: 'Name is required' });
     minLength(schemaPath.name, 3, { message: 'Name must be at least 3 characters long' });
-    // validateHttp();
+    // validateHttp(); // TODO: check is pokemon exists
   });
 }
