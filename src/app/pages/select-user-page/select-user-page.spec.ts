@@ -1,17 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import SelectUserPage from './select-user-page';
 
-import { SelectUserPage } from './select-user-page';
-
-describe('SelectTrainer', () => {
-  let component: SelectTrainer;
-  let fixture: ComponentFixture<SelectTrainer>;
+describe('SelectUserPage', () => {
+  let component: SelectUserPage;
+  let fixture: ComponentFixture<SelectUserPage>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SelectTrainer],
+      imports: [SelectUserPage],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(SelectTrainer);
+    fixture = TestBed.createComponent(SelectUserPage);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

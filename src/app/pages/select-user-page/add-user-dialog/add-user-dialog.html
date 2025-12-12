@@ -1,3 +1,20 @@
-<p>add-user-dialog works!</p>
-
-<button type="button" mat-button [mat-dialog-close]="{id:0, name: '', avatarUrl: ''}">Close</button>
+<h2 mat-dialog-title>Ajouter un dresseur</h2>
+<mat-dialog-content>
+  <p>What's your favorite animal?</p>
+  <div class="trainer-form">
+    <mat-form-field>
+      <mat-label>Nom</mat-label>
+      <input matInput [field]="trainerForm.name"/>
+      <mat-error>{{ trainerForm.name().errors()[0]?.message }}</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Description</mat-label>
+      <input matInput [field]="trainerForm.description"/>
+      <mat-error>{{ trainerForm.description().errors()[0]?.message }}</mat-error>
+    </mat-form-field>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button type="button" matButton mat-dialog-close>Annuler</button>
+  <button type="button" matButton="filled" cdkFocusInitial>Ajouter</button>
+</mat-dialog-actions>

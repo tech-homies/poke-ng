@@ -17,7 +17,7 @@ import { PokemonsApi } from '../../../services/api/pokemons.api';
 import { concatAll, concatMap, from, Observable, switchMap, toArray } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { MatIcon } from '@angular/material/icon';
-import { toObservable } from '@angular/core/rxjs-interop';
+import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-trainer-card',
@@ -39,27 +39,26 @@ import { toObservable } from '@angular/core/rxjs-interop';
 })
 export class TrainerCard {
   readonly trainer = input.required<TrainerDTO>();
-  readonly teamsApi = inject(TeamsApi);
-  readonly pokemonsApi = inject(PokemonsApi);
-  pokemons = signal<PokemonDTO[]>([]);
+  readonly #teamsApi = inject(TeamsApi);
+  readonly #pokemonsApi = inject(PokemonsApi);
 
-  constructor() {
-    toObservable(this.trainer)
-      .pipe(
-        switchMap((trainer) => this.teamsApi.getTrainerTeam(trainer)),
-        map((team) => team.pokemons),
-        switchMap((pokemonIds) =>
-          from(pokemonIds).pipe(
-            concatMap((pokemonId) => this.pokemonsApi.getOne(pokemonId)),
-            toArray(),
-          ),
+  readonly pokemons = toSignal(
+    toObservable(this.trainer).pipe(
+      switchMap((trainer) => this.#teamsApi.getTrainerTeam(trainer)),
+      map((team) => team.pokemons),
+      switchMap((pokemonIds) =>
+        from(pokemonIds).pipe(
+          concatMap((pokemonId) => this.#pokemonsApi.getOne(pokemonId)),
+          toArray(),
         ),
-      )
-      .subscribe((pokemons) => this.pokemons.set(pokemons));
-  }
+      ),
+    ),
+    { initialValue: [] },
+  );
 
+  // TO REMOVE AFTER TESTS
   protected updateTeam() {
-    this.teamsApi
+    this.#teamsApi
       .setTrainerTeam({
         trainerId: this.trainer().id,
         pokemons: this.pokemons().map((pokemon) => pokemon.pokedex_id + 1),

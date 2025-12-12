@@ -8,13 +8,14 @@ describe('TrainerCard', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TrainerCard]
-    })
-    .compileComponents();
+      imports: [TrainerCard],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(TrainerCard);
     component = fixture.componentInstance;
+    fixture.componentRef.setInput('trainer', { id: 1, name: 'Ash Ketchum' });
     await fixture.whenStable();
+    fixture.detectChanges();
   });
 
   it('should create', () => {
