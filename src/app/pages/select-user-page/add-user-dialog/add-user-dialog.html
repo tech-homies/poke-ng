@@ -1,6 +1,6 @@
 <h2 mat-dialog-title>Ajouter un dresseur</h2>
 <mat-dialog-content>
-  <p>What's your favorite animal?</p>
+  <p>Remplissez les informations du nouveau dresseur :</p>
   <div class="trainer-form">
     <mat-form-field>
       <mat-label>Nom</mat-label>
@@ -15,26 +15,36 @@
     <mat-form-field>
       <mat-label>Avatar</mat-label>
       <input type="url" matInput [field]="trainerForm.avatarUrl"/>
+      <mat-error>{{ trainerForm.avatarUrl().errors()[0]?.message }}</mat-error>
     </mat-form-field>
     <mat-form-field>
       <mat-label>Age</mat-label>
       <input type="number" matInput [field]="trainerForm.age"/>
+      <mat-error>{{ trainerForm.age().errors()[0]?.message }}</mat-error>
     </mat-form-field>
     <mat-form-field>
       <mat-label>Ville</mat-label>
       <input matInput [field]="trainerForm.hometown"/>
+      <mat-error>{{ trainerForm.hometown().errors()[0]?.message }}</mat-error>
     </mat-form-field>
     <mat-form-field>
       <mat-label>Niveau</mat-label>
-      <input matInput [field]="trainerForm.level"/>
+      <mat-select [field]="trainerForm.level">
+        <mat-option value="beginner">🌱 Débutant</mat-option>
+        <mat-option value="intermediate">⚡ Intermédiaire</mat-option>
+        <mat-option value="advanced">🔥 Avancé</mat-option>
+        <mat-option value="master">👑 Maître</mat-option>
+      </mat-select>
+      <mat-error>{{ trainerForm.level().errors()[0]?.message }}</mat-error>
     </mat-form-field>
-<!--    <mat-form-field>-->
-<!--      <mat-label>Pokemon favori</mat-label>-->
-<!--      <input type="number" matInput [field]="trainerForm.favoritePokemon"/>-->
-<!--    </mat-form-field>-->
+    <mat-form-field>
+      <mat-label>Pokedex ID du Pokemon favori (optionnel)</mat-label>
+      <input type="number" matInput [field]="trainerForm.favoritePokemon" placeholder="0 = aucun"/>
+      <mat-error>{{ trainerForm.favoritePokemon().errors()[0]?.message }}</mat-error>
+    </mat-form-field>
   </div>
 </mat-dialog-content>
 <mat-dialog-actions>
   <button type="button" matButton mat-dialog-close>Annuler</button>
-  <button type="button" matButton="filled" cdkFocusInitial>Ajouter</button>
+  <button type="button" matButton="filled" [disabled]="trainerForm().invalid()">Ajouter</button>
 </mat-dialog-actions>
