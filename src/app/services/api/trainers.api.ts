@@ -19,4 +19,8 @@ export class TrainersApi {
       defaultValue: [],
     });
   }
+
+  create(trainer: Omit<TrainerDTO, 'id'>): Observable<TrainerDTO> {
+    return this.http.post<TrainerDTO>(`${environment.apiUrl}/trainers`, trainer);
+  }
 }

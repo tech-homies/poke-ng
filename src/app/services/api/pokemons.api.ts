@@ -1,4 +1,4 @@
-import { inject, Injectable, Signal } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { HttpClient, httpResource, HttpResourceRef } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { PokemonDTO } from './pokemonDTO';
@@ -9,18 +9,19 @@ import { Observable } from 'rxjs';
 })
 export class PokemonsApi {
   readonly http = inject(HttpClient);
+  readonly resourceUrl = `${environment.apiUrl}/pokemons`;
 
   getAllResource(): HttpResourceRef<PokemonDTO[]> {
-    return httpResource<PokemonDTO[]>(() => `${environment.apiUrl}/pokemons`, {
+    return httpResource<PokemonDTO[]>(() => this.resourceUrl, {
       defaultValue: [],
     });
   }
 
   getOneResource(id: PokemonDTO['pokedex_id']): HttpResourceRef<PokemonDTO | undefined> {
-    return httpResource<PokemonDTO>(() => `${environment.apiUrl}/pokemons/${id}`);
+    return httpResource<PokemonDTO>(() => `${this.resourceUrl}/${id}`);
   }
 
   getOne(id: PokemonDTO['pokedex_id']): Observable<PokemonDTO> {
-    return this.http.get<PokemonDTO>(`${environment.apiUrl}/pokemons/${id}`);
+    return this.http.get<PokemonDTO>(`${this.resourceUrl}/${id}`);
   }
 }

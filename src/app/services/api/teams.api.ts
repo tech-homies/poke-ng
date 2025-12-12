@@ -1,5 +1,5 @@
-import { inject, Injectable, Signal } from '@angular/core';
-import { HttpClient, httpResource, HttpResourceRef } from '@angular/common/http';
+import { inject, Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { TeamDTO } from './team.dto';
 import { TrainerDTO } from './trainer.dto';

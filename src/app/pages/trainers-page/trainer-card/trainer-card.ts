@@ -1,4 +1,4 @@
-import { Component, effect, inject, input, OnInit, signal, Signal } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import { TrainerDTO } from '../../../services/api/trainer.dto';
 import {
   MatCard,
@@ -12,9 +12,8 @@ import {
 } from '@angular/material/card';
 import { TeamsApi } from '../../../services/api/teams.api';
 import { MatButton, MatIconButton } from '@angular/material/button';
-import { PokemonDTO } from '../../../services/api/pokemonDTO';
 import { PokemonsApi } from '../../../services/api/pokemons.api';
-import { concatAll, concatMap, from, Observable, switchMap, toArray } from 'rxjs';
+import { concatMap, from, switchMap, toArray } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { MatIcon } from '@angular/material/icon';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';

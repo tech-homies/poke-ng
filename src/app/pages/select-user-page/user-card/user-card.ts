@@ -1,4 +1,4 @@
-import { Component, inject, input, signal } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import {
   MatCard,

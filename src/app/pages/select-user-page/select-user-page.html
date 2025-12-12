@@ -1,4 +1,4 @@
-<h1>Choisi ton dresseur 🚀</h1>
+<h1 class="title">Choisi ton dresseur 🚀</h1>
 @if (users.isLoading()) {
   <mat-spinner></mat-spinner>
 } @else {
@@ -7,7 +7,7 @@
       <app-user-card [user]="user"></app-user-card>
     }
   </div>
-  <div>
+  <div class="actions">
     <button mat-stroked-button type="button" (click)="addUser()">Add UserCard</button>
   </div>
 }

@@ -6,7 +6,7 @@ import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { MatDialog } from '@angular/material/dialog';
 import { AddUserDialog } from './add-user-dialog/add-user-dialog';
 import { TrainerDTO } from '../../services/api/trainer.dto';
-import { filter } from 'rxjs';
+import { filter, switchMap, tap } from 'rxjs';
 import { UserCard } from './user-card/user-card';
 
 @Component({
@@ -26,9 +26,12 @@ export default class SelectUserPage {
     this.#dialog
       .open<AddUserDialog, undefined, TrainerDTO>(AddUserDialog)
       .afterClosed()
-      .pipe(filter(Boolean), takeUntilDestroyed(this.#destroyRef))
-      .subscribe((user) => {
-        this.users.update((users) => users.concat(user));
-      });
+      .pipe(
+        filter(Boolean),
+        switchMap((user) => this.#trainersApi.create(user)),
+        tap((user) => this.users.update((users) => users.concat(user))),
+        takeUntilDestroyed(this.#destroyRef),
+      )
+      .subscribe();
   }
 }
