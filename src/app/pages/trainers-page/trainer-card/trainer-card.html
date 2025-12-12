@@ -1,16 +1,16 @@
 @if (trainer(); as trainer) {
   <mat-card appearance="outlined">
     <mat-card-header>
-      <img mat-card-avatar [src]="trainer.avatarUrl" [alt]="'Photo of ' + trainer.name">
+      <img height="40" mat-card-avatar width="40" [alt]="'Photo of ' + trainer.name" [ngSrc]="trainer.avatarUrl">
       <mat-card-title>{{ trainer.name }}</mat-card-title>
       <mat-card-subtitle>ID: {{ trainer.id }}</mat-card-subtitle>
     </mat-card-header>
-    <img mat-card-image class="trainer-avatar" [src]="trainer.avatarUrl" [alt]="'Photo of ' + trainer.name">
+    <img class="trainer-avatar" height="200" mat-card-image width="298" [alt]="'Photo of ' + trainer.name" [ngSrc]="trainer.avatarUrl">
     <mat-card-content>
       <p class="pokemon-list">
         @for (pokemon of pokemons(); track pokemon.pokedex_id) {
           <div class="pokemon-item">
-            <img class="pokemon-img" [src]="pokemon.sprites.regular" [alt]="'Image of ' + pokemon.name.en">
+            <img class="pokemon-img" height="50" width="50" [alt]="'Image of ' + pokemon.name.en" [ngSrc]="pokemon.sprites.regular">
             <div>{{ pokemon.name.fr }}</div>
           </div>
         }
@@ -18,7 +18,7 @@
     </mat-card-content>
     <mat-card-actions class="actions">
       <button matButton type="button">Combats</button>
-      <button matButton="filled" type="button" class="battle">Défier</button>
+      <button class="battle" matButton="filled" type="button">Défier</button>
       <button matIconButton type="button" (click)="updateTeam()"><mat-icon>shuffle</mat-icon></button>
     </mat-card-actions>
   </mat-card>

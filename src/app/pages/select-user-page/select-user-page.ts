@@ -1,4 +1,4 @@
-import { Component, DestroyRef, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, inject } from '@angular/core';
 import { TrainersApi } from '../../services/api/trainers.api';
 import { MatButton } from '@angular/material/button';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -11,7 +11,8 @@ import { UserCard } from './user-card/user-card';
 
 @Component({
   selector: 'app-select-user-page',
-  imports: [UserCard, MatButton, MatProgressSpinner, UserCard],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [UserCard, MatButton, MatProgressSpinner],
   templateUrl: './select-user-page.html',
   styleUrl: './select-user-page.scss',
 })

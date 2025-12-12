@@ -1,4 +1,4 @@
-import { Component, inject, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
 import { TrainerDTO } from '../../../services/api/trainer.dto';
 import {
   MatCard,
@@ -17,9 +17,11 @@ import { concatMap, from, switchMap, toArray } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { MatIcon } from '@angular/material/icon';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
+import { NgOptimizedImage } from '@angular/common';
 
 @Component({
   selector: 'app-trainer-card',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     MatCard,
     MatCardActions,
@@ -32,6 +34,7 @@ import { toObservable, toSignal } from '@angular/core/rxjs-interop';
     MatButton,
     MatIcon,
     MatIconButton,
+    NgOptimizedImage,
   ],
   templateUrl: './trainer-card.html',
   styleUrl: './trainer-card.scss',
@@ -56,7 +59,7 @@ export class TrainerCard {
   );
 
   // TO REMOVE AFTER TESTS
-  protected updateTeam() {
+  protected updateTeam(): void {
     this.#teamsApi
       .setTrainerTeam({
         trainerId: this.trainer().id,

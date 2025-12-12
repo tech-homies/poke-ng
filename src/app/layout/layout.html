@@ -14,9 +14,9 @@
     <mat-toolbar color="primary">
       @if (isHandset()) {
         <button
-          type="button"
           aria-label="Toggle sidenav"
           matIconButton
+          type="button"
           (click)="drawer.toggle()">
           <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
         </button>
@@ -24,18 +24,18 @@
       <span>⚡️ poke-ng</span>
       <span class="spacer"></span>
       @if (user(); as user) {
-        <button type="button" [matMenuTriggerFor]="menu" class="user-button">
-          <img class="user-avatar" [src]="user.avatarUrl" alt="UserCard Avatar"/>
+        <button class="user-button" type="button" [matMenuTriggerFor]="menu">
+          <img alt="UserCard Avatar" class="user-avatar" height="40" width="40" [ngSrc]="user.avatarUrl"/>
           <div>{{ user.name }}</div>
         </button>
         <mat-menu #menu="matMenu">
-          <button mat-menu-item (click)="logout()">Déconnexion</button>
+          <button mat-menu-item type="button" (click)="logout()">Déconnexion</button>
         </mat-menu>
       }
     </mat-toolbar>
     <!-- Add Content Here -->
     <div class="content">
-      <router-outlet></router-outlet>
+      <router-outlet />
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>

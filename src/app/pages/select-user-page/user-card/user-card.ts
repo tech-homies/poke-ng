@@ -1,4 +1,4 @@
-import { Component, inject, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import {
   MatCard,
@@ -13,9 +13,11 @@ import {
 import { TrainerDTO } from '../../../services/api/trainer.dto';
 import { UserStore } from '../../../services/store/user.store';
 import { Router } from '@angular/router';
+import { NgOptimizedImage } from '@angular/common';
 
 @Component({
   selector: 'app-user-card',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     MatButton,
     MatCard,
@@ -26,6 +28,7 @@ import { Router } from '@angular/router';
     MatCardImage,
     MatCardSubtitle,
     MatCardTitle,
+    NgOptimizedImage,
   ],
   templateUrl: './user-card.html',
   styleUrl: './user-card.scss',
@@ -34,9 +37,9 @@ export class UserCard {
   private readonly userStore = inject(UserStore);
   private readonly router = inject(Router);
 
-  user = input.required<TrainerDTO>();
+  readonly user = input.required<TrainerDTO>();
 
-  selectTrainer() {
+  selectTrainer(): void {
     this.userStore.setUser(this.user());
     this.router.navigate(['/app/trainers']);
   }

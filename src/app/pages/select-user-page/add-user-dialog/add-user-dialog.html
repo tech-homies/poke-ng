@@ -9,17 +9,17 @@
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Description</mat-label>
-      <textarea matInput [field]="trainerForm.description" rows="8"></textarea>
+      <textarea matInput rows="8" [field]="trainerForm.description"></textarea>
       <mat-error>{{ trainerForm.description().errors()[0]?.message }}</mat-error>
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Avatar</mat-label>
-      <input type="url" matInput [field]="trainerForm.avatarUrl"/>
+      <input matInput type="url" [field]="trainerForm.avatarUrl"/>
       <mat-error>{{ trainerForm.avatarUrl().errors()[0]?.message }}</mat-error>
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Age</mat-label>
-      <input type="number" matInput [field]="trainerForm.age"/>
+      <input matInput type="number" [field]="trainerForm.age"/>
       <mat-error>{{ trainerForm.age().errors()[0]?.message }}</mat-error>
     </mat-form-field>
     <mat-form-field appearance="outline">
@@ -39,10 +39,10 @@
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Pokedex ID du Pokemon favori (optionnel)</mat-label>
-      <input type="number" matInput [field]="trainerForm.favoritePokemon" placeholder="0 = aucun"/>
+      <input matInput placeholder="0 = aucun" type="number" [field]="trainerForm.favoritePokemon"/>
       <mat-error>{{ trainerForm.favoritePokemon().errors()[0]?.message }}</mat-error>
       @if (trainerForm.favoritePokemon().pending()) {
-        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+        <mat-progress-bar mode="indeterminate" />
       } @else if (!trainerForm.favoritePokemon().value()) {
         <mat-hint>Entrez 0 si le dresseur n'a pas de Pokémon favori.</mat-hint>
       }
@@ -50,7 +50,7 @@
   </div>
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button type="button" matButton mat-dialog-close>Annuler</button>
-  <button type="button" matButton="filled" [disabled]="trainerForm().invalid() || trainerForm().pending()" (click)="addTrainer()">Ajouter
+  <button mat-dialog-close matButton type="button">Annuler</button>
+  <button matButton="filled" type="button" [disabled]="trainerForm().invalid() || trainerForm().pending()" (click)="addTrainer()">Ajouter
   </button>
 </mat-dialog-actions>

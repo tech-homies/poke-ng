@@ -1,10 +1,10 @@
 <h1>Dresseurs</h1>
 @if (trainers.isLoading()) {
-  <mat-spinner></mat-spinner>
+  <mat-spinner />
 } @else {
   <div class="trainers">
     @for (trainer of trainers.value(); track trainer.id) {
-      <app-trainer-card [trainer]="trainer"></app-trainer-card>
+      <app-trainer-card [trainer]="trainer" />
     }
   </div>
 }

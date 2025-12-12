@@ -1,10 +1,11 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { TrainersApi } from '../../services/api/trainers.api';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { TrainerCard } from './trainer-card/trainer-card';
 
 @Component({
   selector: 'app-trainers-page',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [MatProgressSpinner, TrainerCard],
   templateUrl: './trainers-page.html',
   styleUrl: './trainers-page.scss',

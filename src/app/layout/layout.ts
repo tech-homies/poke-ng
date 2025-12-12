@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
@@ -10,11 +10,13 @@ import { UserStore } from '../services/store/user.store';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { MatMenu, MatMenuItem, MatMenuTrigger } from '@angular/material/menu';
+import { NgOptimizedImage } from '@angular/common';
 
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.html',
   styleUrl: './layout.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     MatToolbarModule,
     MatButtonModule,
@@ -26,6 +28,7 @@ import { MatMenu, MatMenuItem, MatMenuTrigger } from '@angular/material/menu';
     MatMenuTrigger,
     MatMenu,
     MatMenuItem,
+    NgOptimizedImage,
   ],
 })
 export default class Layout {

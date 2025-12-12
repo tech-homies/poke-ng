@@ -11,11 +11,11 @@ export class UserStore {
     this.user.set(user);
   }
 
-  isLogged() {
+  isLogged(): boolean {
     return this.user() !== null;
   }
 
-  logout() {
+  logout(): void {
     this.user.set(null);
   }
 }

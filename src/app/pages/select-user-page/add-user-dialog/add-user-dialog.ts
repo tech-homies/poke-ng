@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import {
   MatDialogActions,
@@ -18,6 +18,7 @@ import { MatProgressBar } from '@angular/material/progress-bar';
 
 @Component({
   selector: 'app-add-user-card-dialog',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     MatButton,
     MatDialogClose,
@@ -54,7 +55,7 @@ export class AddUserDialog {
     favoritePokemon: 0, // 0 indique "pas de pokémon sélectionné"
   };
 
-  trainerModel = signal(this.initialTrainerData);
+  readonly trainerModel = signal(this.initialTrainerData);
 
   trainerForm = form(this.trainerModel, (schemaPath) => {
     // Validation du nom : obligatoire et minimum 3 caractères
@@ -123,7 +124,7 @@ export class AddUserDialog {
     };
   }
 
-  addTrainer() {
+  addTrainer(): void {
     this.dialogRef.close(this.getTrainerData());
   }
 }
