@@ -17,7 +17,6 @@ import { NgOptimizedImage } from '@angular/common';
 
 @Component({
   selector: 'app-user-card',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     MatButton,
     MatCard,
@@ -32,6 +31,7 @@ import { NgOptimizedImage } from '@angular/common';
   ],
   templateUrl: './user-card.html',
   styleUrl: './user-card.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserCard {
   private readonly userStore = inject(UserStore);

@@ -18,7 +18,6 @@ import { MatProgressBar } from '@angular/material/progress-bar';
 
 @Component({
   selector: 'app-add-user-card-dialog',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     MatButton,
     MatDialogClose,
@@ -39,6 +38,7 @@ import { MatProgressBar } from '@angular/material/progress-bar';
   ],
   templateUrl: './add-user-dialog.html',
   styleUrl: './add-user-dialog.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddUserDialog {
   private readonly pokemonsApi = inject(PokemonsApi);

@@ -5,10 +5,10 @@ import { TrainerCard } from './trainer-card/trainer-card';
 
 @Component({
   selector: 'app-trainers-page',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [MatProgressSpinner, TrainerCard],
   templateUrl: './trainers-page.html',
   styleUrl: './trainers-page.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class TrainersPage {
   readonly #trainersApi = inject(TrainersApi);

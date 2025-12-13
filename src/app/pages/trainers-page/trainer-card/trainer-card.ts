@@ -21,10 +21,10 @@ import { NgOptimizedImage } from '@angular/common';
 import { MatIcon } from '@angular/material/icon';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { UserStore } from '../../../services/store/user.store';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-trainer-card',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     MatCard,
     MatCardActions,
@@ -38,9 +38,11 @@ import { UserStore } from '../../../services/store/user.store';
     NgOptimizedImage,
     MatIcon,
     MatProgressSpinner,
+    RouterLink,
   ],
   templateUrl: './trainer-card.html',
   styleUrl: './trainer-card.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TrainerCard {
   readonly trainer = input.required<TrainerDTO>();

@@ -20,6 +20,10 @@ export const routes: Routes = [
         loadComponent: () => import('./pages/trainer-details-page/trainer-details-page'),
       },
       {
+        path: 'trainers/:id/battles',
+        loadComponent: () => import('./pages/trainer-battles-page/trainer-battles-page'),
+      },
+      {
         path: 'pokemons',
         loadComponent: () => import('./pages/pokemons-page/pokemons-page'),
       },

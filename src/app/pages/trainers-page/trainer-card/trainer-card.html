@@ -36,7 +36,7 @@
       </div>
     </mat-card-content>
     <mat-card-actions class="actions">
-      <button matButton type="button">Combats</button>
+      <a matButton [routerLink]="[trainer.id, 'battles']">Combats</a>
       @if (!isCurrentUser()) {
         <button class="battle" matButton="filled" type="button">Défier</button>
       }

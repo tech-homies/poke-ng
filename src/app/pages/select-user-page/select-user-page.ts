@@ -11,10 +11,10 @@ import { UserCard } from './user-card/user-card';
 
 @Component({
   selector: 'app-select-user-page',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [UserCard, MatButton, MatProgressSpinner],
   templateUrl: './select-user-page.html',
   styleUrl: './select-user-page.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class SelectUserPage {
   readonly #trainersApi = inject(TrainersApi);
