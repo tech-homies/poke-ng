@@ -20,6 +20,7 @@ import { computed } from '@angular/core';
 import { NgOptimizedImage } from '@angular/common';
 import { MatIcon } from '@angular/material/icon';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
+import { UserStore } from '../../../services/store/user.store';
 
 @Component({
   selector: 'app-trainer-card',
@@ -45,6 +46,13 @@ export class TrainerCard {
   readonly trainer = input.required<TrainerDTO>();
   readonly #teamsApi = inject(TeamsApi);
   readonly #pokemonsApi = inject(PokemonsApi);
+  readonly #userStore = inject(UserStore);
+
+  readonly isCurrentUser = computed(() => {
+    const currentUser = this.#userStore.user();
+    const trainer = this.trainer();
+    return currentUser?.id === trainer.id;
+  });
 
   readonly pokemons = toSignal(
     toObservable(this.trainer).pipe(

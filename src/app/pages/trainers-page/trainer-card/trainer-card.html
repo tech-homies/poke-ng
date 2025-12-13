@@ -37,7 +37,9 @@
     </mat-card-content>
     <mat-card-actions class="actions">
       <button matButton type="button">Combats</button>
-      <button class="battle" matButton="filled" type="button">Défier</button>
+      @if (!isCurrentUser()) {
+        <button class="battle" matButton="filled" type="button">Défier</button>
+      }
     </mat-card-actions>
   </mat-card>
 }
