@@ -11,13 +11,15 @@ import {
   MatCardTitle,
 } from '@angular/material/card';
 import { TeamsApi } from '../../../services/api/teams.api';
-import { MatButton, MatIconButton } from '@angular/material/button';
+import { MatButton } from '@angular/material/button';
 import { PokemonsApi } from '../../../services/api/pokemons.api';
-import { concatMap, from, switchMap, toArray } from 'rxjs';
+import { concatMap, from, of, switchMap, toArray } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { MatIcon } from '@angular/material/icon';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
+import { computed } from '@angular/core';
 import { NgOptimizedImage } from '@angular/common';
+import { MatIcon } from '@angular/material/icon';
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-trainer-card',
@@ -32,9 +34,9 @@ import { NgOptimizedImage } from '@angular/common';
     MatCardSubtitle,
     MatCardTitle,
     MatButton,
-    MatIcon,
-    MatIconButton,
     NgOptimizedImage,
+    MatIcon,
+    MatProgressSpinner,
   ],
   templateUrl: './trainer-card.html',
   styleUrl: './trainer-card.scss',
@@ -58,13 +60,21 @@ export class TrainerCard {
     { initialValue: [] },
   );
 
-  // TO REMOVE AFTER TESTS
-  protected updateTeam(): void {
-    this.#teamsApi
-      .setTrainerTeam({
-        trainerId: this.trainer().id,
-        pokemons: this.pokemons().map((pokemon) => pokemon.pokedex_id + 1),
-      })
-      .subscribe();
-  }
+  readonly favoritePokemonName = toSignal(
+    toObservable(this.trainer).pipe(
+      switchMap((trainer) => {
+        if (trainer.favoritePokemon) {
+          return this.#pokemonsApi.getOne(trainer.favoritePokemon).pipe(map((pokemon) => pokemon.name.fr));
+        }
+        return of(null);
+      }),
+    ),
+    { initialValue: null },
+  );
+
+  readonly isFavoritePokemonLoading = computed(() => {
+    const trainer = this.trainer();
+    const favoritePokemonName = this.favoritePokemonName();
+    return trainer.favoritePokemon && favoritePokemonName === null;
+  });
 }

@@ -5,21 +5,39 @@
       <mat-card-title>{{ trainer.name }}</mat-card-title>
       <mat-card-subtitle>ID: {{ trainer.id }}</mat-card-subtitle>
     </mat-card-header>
-    <img class="trainer-avatar" height="200" mat-card-image width="298" [alt]="'Photo of ' + trainer.name" [ngSrc]="trainer.avatarUrl">
+    <img class="trainer-avatar" height="200" mat-card-image width="298" [alt]="'Photo of ' + trainer.name"
+         [ngSrc]="trainer.avatarUrl">
     <mat-card-content>
-      <p class="pokemon-list">
+      <div class="trainer-info">
+        <div><mat-icon>cake</mat-icon><span>{{ trainer.age }} ans</span></div>
+        <div>
+          <mat-icon>star</mat-icon>
+          <span>
+            @if (isFavoritePokemonLoading()) {
+              <mat-progress-spinner diameter="16" mode="indeterminate" />
+            } @else {
+              {{ favoritePokemonName() || 'Aucun favori' }}
+            }
+          </span>
+        </div>
+        <div><mat-icon>home</mat-icon><span>{{ trainer.hometown }}</span></div>
+        <div><mat-icon>military_tech</mat-icon><span>Niveau {{ trainer.level }}</span></div>
+      </div>
+      <div class="pokemon-list">
         @for (pokemon of pokemons(); track pokemon.pokedex_id) {
-          <div class="pokemon-item">
-            <img class="pokemon-img" height="50" width="50" [alt]="'Image of ' + pokemon.name.en" [ngSrc]="pokemon.sprites.regular">
-            <div>{{ pokemon.name.fr }}</div>
+          <div class="pokemon-card">
+            <div class="pokemon-image-container">
+              <img class="pokemon-img" height="64" width="64" [alt]="'Image of ' + pokemon.name.fr"
+                   [ngSrc]="pokemon.sprites.regular">
+            </div>
+            <div class="pokemon-name">{{ pokemon.name.fr }}</div>
           </div>
         }
-      </p>
+      </div>
     </mat-card-content>
     <mat-card-actions class="actions">
       <button matButton type="button">Combats</button>
       <button class="battle" matButton="filled" type="button">Défier</button>
-      <button matIconButton type="button" (click)="updateTeam()"><mat-icon>shuffle</mat-icon></button>
     </mat-card-actions>
   </mat-card>
 }
