@@ -1,0 +1,11 @@
+<h1>Dresseurs</h1>
+@if (trainers.isLoading()) {
+  <mat-spinner />
+} @else {
+  <div class="trainers">
+    @for (trainer of trainers.value(); track trainer.id) {
+      <app-trainer-card [trainer]="trainer" />
+    }
+  </div>
+}
+

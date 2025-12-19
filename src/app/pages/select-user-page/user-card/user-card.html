@@ -1,0 +1,16 @@
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <img height="40" mat-card-avatar width="40" [alt]="'Photo of ' + user().name" [ngSrc]="user().avatarUrl">
+    <mat-card-title>{{ user().name }}</mat-card-title>
+    <mat-card-subtitle>ID: {{ user().id }}</mat-card-subtitle>
+  </mat-card-header>
+  <img class="user-avatar" height="200" mat-card-image width="298" [alt]="'Photo of ' + user().name" [ngSrc]="user().avatarUrl">
+  <mat-card-content>
+    <p class="user-description">
+      {{ user().description }}
+    </p>
+  </mat-card-content>
+  <mat-card-actions class="actions">
+    <button matButton="filled" type="button" (click)="selectTrainer()">Go !</button>
+  </mat-card-actions>
+</mat-card>

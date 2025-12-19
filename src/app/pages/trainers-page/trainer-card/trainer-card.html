@@ -1,0 +1,45 @@
+@if (trainer(); as trainer) {
+  <mat-card appearance="outlined">
+    <mat-card-header>
+      <img height="40" mat-card-avatar width="40" [alt]="'Photo of ' + trainer.name" [ngSrc]="trainer.avatarUrl">
+      <mat-card-title>{{ trainer.name }}</mat-card-title>
+      <mat-card-subtitle>ID: {{ trainer.id }}</mat-card-subtitle>
+    </mat-card-header>
+    <img class="trainer-avatar" height="200" mat-card-image width="298" [alt]="'Photo of ' + trainer.name"
+         [ngSrc]="trainer.avatarUrl">
+    <mat-card-content>
+      <div class="trainer-info">
+        <div><mat-icon>cake</mat-icon><span>{{ trainer.age }} ans</span></div>
+        <div>
+          <mat-icon>star</mat-icon>
+          <span>
+            @if (isFavoritePokemonLoading()) {
+              <mat-progress-spinner diameter="16" mode="indeterminate" />
+            } @else {
+              {{ favoritePokemonName() || 'Aucun favori' }}
+            }
+          </span>
+        </div>
+        <div><mat-icon>home</mat-icon><span>{{ trainer.hometown }}</span></div>
+        <div><mat-icon>military_tech</mat-icon><span>Niveau {{ trainer.level }}</span></div>
+      </div>
+      <div class="pokemon-list">
+        @for (pokemon of pokemons(); track pokemon.pokedex_id) {
+          <div class="pokemon-card">
+            <div class="pokemon-image-container">
+              <img class="pokemon-img" height="64" width="64" [alt]="'Image of ' + pokemon.name.fr"
+                   [ngSrc]="pokemon.sprites.regular">
+            </div>
+            <div class="pokemon-name">{{ pokemon.name.fr }}</div>
+          </div>
+        }
+      </div>
+    </mat-card-content>
+    <mat-card-actions class="actions">
+      <a matButton [routerLink]="[trainer.id, 'battles']">Combats</a>
+      @if (!isCurrentUser()) {
+        <button class="battle" matButton="filled" type="button">Défier</button>
+      }
+    </mat-card-actions>
+  </mat-card>
+}

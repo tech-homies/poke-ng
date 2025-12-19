@@ -1,0 +1,56 @@
+<h2 mat-dialog-title>Ajouter un dresseur</h2>
+<mat-dialog-content>
+  <p>Remplissez les informations du nouveau dresseur :</p>
+  <div class="trainer-form">
+    <mat-form-field appearance="outline">
+      <mat-label>Nom</mat-label>
+      <input matInput [field]="trainerForm.name"/>
+      <mat-error>{{ trainerForm.name().errors()[0]?.message }}</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Description</mat-label>
+      <textarea matInput rows="8" [field]="trainerForm.description"></textarea>
+      <mat-error>{{ trainerForm.description().errors()[0]?.message }}</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Avatar</mat-label>
+      <input matInput type="url" [field]="trainerForm.avatarUrl"/>
+      <mat-error>{{ trainerForm.avatarUrl().errors()[0]?.message }}</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Age</mat-label>
+      <input matInput type="number" [field]="trainerForm.age"/>
+      <mat-error>{{ trainerForm.age().errors()[0]?.message }}</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Ville</mat-label>
+      <input matInput [field]="trainerForm.hometown"/>
+      <mat-error>{{ trainerForm.hometown().errors()[0]?.message }}</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Niveau</mat-label>
+      <mat-select [field]="trainerForm.level">
+        <mat-option value="beginner">🌱 Débutant</mat-option>
+        <mat-option value="intermediate">⚡ Intermédiaire</mat-option>
+        <mat-option value="advanced">🔥 Avancé</mat-option>
+        <mat-option value="master">👑 Maître</mat-option>
+      </mat-select>
+      <mat-error>{{ trainerForm.level().errors()[0]?.message }}</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Pokedex ID du Pokemon favori (optionnel)</mat-label>
+      <input matInput placeholder="0 = aucun" type="number" [field]="trainerForm.favoritePokemon"/>
+      <mat-error>{{ trainerForm.favoritePokemon().errors()[0]?.message }}</mat-error>
+      @if (trainerForm.favoritePokemon().pending()) {
+        <mat-progress-bar mode="indeterminate" />
+      } @else if (!trainerForm.favoritePokemon().value()) {
+        <mat-hint>Entrez 0 si le dresseur n'a pas de Pokémon favori.</mat-hint>
+      }
+    </mat-form-field>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-dialog-close matButton type="button">Annuler</button>
+  <button matButton="filled" type="button" [disabled]="trainerForm().invalid() || trainerForm().pending()" (click)="addTrainer()">Ajouter
+  </button>
+</mat-dialog-actions>

@@ -1,0 +1,110 @@
+@use '@angular/material' as mat;
+
+:host {
+  display: block;
+  width: 300px;
+}
+
+.trainer-avatar {
+  object-fit: cover;
+  height: 250px;
+}
+
+.trainer-info {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  margin: 16px 0;
+
+  & > div {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 16px;
+    background: var(--mat-sys-surface-container-low);
+    border-radius: 12px;
+    border-left: 4px solid var(--mat-sys-primary);
+
+    mat-icon {
+      color: var(--mat-sys-primary);
+      font-size: 20px;
+      width: 20px;
+      height: 20px;
+    }
+
+    span {
+      font-weight: 500;
+      color: var(--mat-sys-on-surface);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+
+      mat-progress-spinner {
+        display: inline-block;
+      }
+    }
+  }
+}
+
+.pokemon-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+  gap: 12px;
+  margin: 16px 0;
+  padding: 0;
+  height: 128px;
+
+  .pokemon-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: var(--mat-sys-surface-container-low);
+    border-radius: 16px;
+    padding: 12px 8px;
+    border: 2px solid transparent;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .pokemon-image-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 72px;
+    height: 72px;
+    background: var(--mat-sys-surface-container-highest);
+    border-radius: 50%;
+    margin-bottom: 8px;
+    border: 3px solid var(--mat-sys-outline-variant);
+  }
+
+  .pokemon-img {
+    width: 56px;
+    height: 56px;
+    object-fit: contain;
+  }
+
+  .pokemon-name {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-align: center;
+    color: var(--mat-sys-on-surface);
+    line-height: 1.2;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+.actions {
+  display: inline-flex;
+  justify-content: space-evenly;
+  margin: 8px 0;
+}
+
+button.battle {
+  @include mat.button-overrides((
+    filled-container-color: var(--mat-sys-error-container),
+    filled-label-text-color: var(--mat-sys-error)
+  ));
+}

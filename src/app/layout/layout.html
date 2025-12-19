@@ -1,0 +1,41 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport
+               [attr.role]="isHandset() ? 'dialog' : 'navigation'"
+               [mode]="isHandset() ? 'over' : 'side'"
+               [opened]="!isHandset()">
+    <mat-toolbar>Menu</mat-toolbar>
+    <mat-nav-list>
+      <a mat-list-item routerLink="trainers">Dresseurs</a>
+      <a mat-list-item routerLink="pokemons">Pokémons</a>
+      <a mat-list-item routerLink="ranking">Classement</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      @if (isHandset()) {
+        <button
+          aria-label="Toggle sidenav"
+          matIconButton
+          type="button"
+          (click)="drawer.toggle()">
+          <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+        </button>
+      }
+      <span>⚡️ poke-ng</span>
+      <span class="spacer"></span>
+      @if (user(); as user) {
+        <button class="user-button" type="button" [matMenuTriggerFor]="menu">
+          <img alt="UserCard Avatar" class="user-avatar" height="40" width="40" [ngSrc]="user.avatarUrl"/>
+          <div>{{ user.name }}</div>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item type="button" (click)="logout()">Déconnexion</button>
+        </mat-menu>
+      }
+    </mat-toolbar>
+    <!-- Add Content Here -->
+    <div class="content">
+      <router-outlet />
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

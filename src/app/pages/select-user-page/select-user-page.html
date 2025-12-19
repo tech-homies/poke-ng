@@ -1,0 +1,13 @@
+<h1 class="title">Choisi ton dresseur 🚀</h1>
+@if (users.isLoading()) {
+  <mat-spinner />
+} @else {
+  <div class="users">
+    @for (user of users.value(); track user.id) {
+      <app-user-card [user]="user" />
+    }
+  </div>
+  <div class="actions">
+    <button mat-stroked-button type="button" (click)="addUser()">Ajouter un nouveau dresseur</button>
+  </div>
+}
